@@ -1243,8 +1243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c4b0fb9002e7248797695e4d51929bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridManager
-  cols: 0
-  rows: 0
+  cols: 3
+  rows: 3
 --- !u!4 &287360424
 Transform:
   m_ObjectHideFlags: 0
