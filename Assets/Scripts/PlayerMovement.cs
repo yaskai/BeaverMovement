@@ -15,20 +15,24 @@ public class PlayerMovement : MonoBehaviour
 		for(ushort i = 0; i < 8; i++)
 		{
 			ushort dir_id = i;
-			ArrowButtons[i].onClick.AddListener(() => Move(dir_id));
+			ArrowButtons[i].onClick.AddListener(() => OnArrowClick(dir_id));
 		}
+		
+		GridPosition.x = _gridManager.cols / 2;
+		GridPosition.y = _gridManager.rows / 2;
     }
 	
-	void Move(ushort DirIndex) 
+	void OnArrowClick(ushort dirIndex) 
 	{
-		//GridPosition.x += direction.x;
-		//GridPosition.y += direction.y;
-		
-		//Debug.Log($"player pos: {GridPosition}");
-
-		//Debug.Log($"{DirIndex}");
-
-		GridPosition = GridLogic.Vector2IntSum(GridPosition, GridLogic.VecDirectionValues[DirIndex]);
+		GridPosition = TryMove(dirIndex);
 		Debug.Log($"player pos: {GridPosition}");
+	}
+
+	Vector2Int TryMove(ushort dirIndex)
+	{
+		Vector2Int newPosition = GridLogic.Vector2IntSum(GridPosition, GridLogic.VecDirectionValues[dirIndex]);
+		if(!_gridManager.ZoneInBounds(newPosition, _gridManager)) return GridPosition;
+
+		return newPosition;
 	}
 }
