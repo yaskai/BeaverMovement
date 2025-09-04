@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "BeaverMovement.sln"
+    "dotnet.defaultSolution": "BeaverMovement3D_V2.sln"
 }

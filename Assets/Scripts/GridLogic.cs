@@ -14,14 +14,14 @@ public static class GridLogic
 	};
 
 	public static Vector2Int[] VecDirectionValues = {
-		new Vector2Int( -1,  -1 ),	// North West
-		new Vector2Int(  0,  -1 ),	// North	
+		new Vector2Int( -1,   1 ),	// North West
+		new Vector2Int(  0,   1 ),	// North	
 		new Vector2Int( -1,   1 ), 	// North East
 		new Vector2Int( -1,   0 ),	// East
 	 	new Vector2Int(  1,   0 ),	// West
-		new Vector2Int(  1,   1 ),	// South West
-		new Vector2Int(  0,   1 ),	// South
-		new Vector2Int(  1,   1 )   // South East
+		new Vector2Int(  1,  -1 ),	// South West
+		new Vector2Int(  0,  -1 ),	// South
+		new Vector2Int(  1,  -1 )   // South East
 	};
 
 	public static Vector2Int DirToVec(ushort dir) 

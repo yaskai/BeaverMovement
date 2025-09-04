@@ -14,8 +14,7 @@ public class PlayerMovement : MonoBehaviour
 		
 		for(ushort i = 0; i < 8; i++)
 		{
-			ushort dir_id = i;
-			ArrowButtons[i].onClick.AddListener(() => OnArrowClick(dir_id));
+			ArrowButtons[i].onClick.AddListener(() => OnArrowClick(i));
 		}
 		
 		GridPosition.x = _gridManager.cols / 2;
@@ -36,3 +35,4 @@ public class PlayerMovement : MonoBehaviour
 		return newPosition;
 	}
 }
+
