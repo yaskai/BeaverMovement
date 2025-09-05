@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-	public int cols, rows;
+	public ushort cols, rows;
 	public int zoneCount;
 	public GameObject[] _zoneObjects;
 
-	public Vector2 minCellSize = new Vector2(2, 2);
+	public Vector2 minCellSize = new Vector2(10, 10);
 
     void Start()
     {
@@ -33,10 +33,13 @@ public class GridManager : MonoBehaviour
 
 		Debug.Log($"found {zoneCount} zones!");
 
-		// Find corner zone using the distance from vec2{world minimum x, world minimum x}
+		// Find top left corner zone using the distance from vec2{world minimum x, world minimum x}
 		// Track current shortest distance corresponding index  
 		float minDist = float.MaxValue;
-		int cornerIndex = 0;
+		int cornerIndexFirst = 0;
+		
+		float maxDist = float.MinValue;
+		int cornerIndexLast = 0;
 
 		for(int i = 0; i < zoneCount; i++)
 		{
@@ -52,19 +55,37 @@ public class GridManager : MonoBehaviour
 			if(dist < minDist)
 			{
 				minDist = dist;
-				cornerIndex = i;	
+				cornerIndexFirst = i;	
+			}
+
+			// Update tracked greatest distance and corner index when new smaller distance is calculated 
+			if(dist > maxDist)
+			{
+				maxDist = dist;
+				cornerIndexLast = i;	
 			}
 		}
 
-		Debug.Log($"corner index: {cornerIndex}");	
+		Debug.Log($"corner index first: {cornerIndexFirst}");	
+		Debug.Log($"corner index last: {cornerIndexLast}");	
+		
 
 		// Sort zones
 		GameObject[] sortedZones = new GameObject[zoneCount];
-		sortedZones[0] = _zoneObjects[cornerIndex];
+		sortedZones[0] = _zoneObjects[cornerIndexFirst];
+		sortedZones[zoneCount-1] = _zoneObjects[cornerIndexLast];
 
 		// TODO: Calculate number of columns and rows...
 		// NOTE: Add filler column/row if max cell distance exceeded,
 		// null array values could be used for UI available directions
+
+		float lenX = sortedZones[zoneCount-1].transform.position.x - sortedZones[0].transform.position.x; 
+		float lenZ = sortedZones[zoneCount-1].transform.position.z - sortedZones[0].transform.position.z; 
+
+		cols = (ushort)(lenX / minCellSize.x);
+		rows = (ushort)(lenZ / minCellSize.y);
+
+		Debug.Log($"grid size: cols: {cols}, rows: {rows}");
 	}
 }
 

@@ -1419,6 +1419,7 @@ MonoBehaviour:
   rows: 3
   zoneCount: 0
   _zoneObjects: []
+  minCellSize: {x: 10, y: 10}
 --- !u!4 &287360424
 Transform:
   m_ObjectHideFlags: 0
